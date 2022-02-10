@@ -238,8 +238,8 @@ Hint: https://ggplot2.tidyverse.org/reference/print.ggplot.html
 
 ```{r, warning=FALSE, message=FALSE}
 #Create a function that plots the monthly mean air temp per site
-plotter <- function(year){
-    yrdata <- forcing_data_full %>% filter(year == year) %>% 
+plotter <- function(yr){
+    yrdata <- forcing_data_full %>% filter(year == yr) %>% 
     group_by(month, site) %>% 
     summarise(meanT = mean(`air temp [K]`))  
     print(ggplot(yrdata, aes(x = month, y = meanT, color = site)) + 
@@ -248,7 +248,7 @@ plotter <- function(year){
           theme(legend.position = c(.1, .8))+
           ylab("Mean air temp [K]")+
           xlab("Month")+
-          ggtitle(year))
+          ggtitle(yr))
 }
 
 #Use a for loop to plot monthly mean air temp per site for 2005 to 2010
@@ -257,12 +257,12 @@ for (i in 2005:2010){
 
 # Plots using just a for loop without creating a function
 # for (i in 2005:2010){
-#   yrdata <- forcing_data_full %>% filter(year == i) %>% 
-#     group_by(month, site) %>% 
-#     summarise(meanT = mean(`air temp [K]`))  
-#   print(ggplot(yrdata, aes(x = month, y = meanT, color = site)) + 
+#   yrdata <- forcing_data_full %>% filter(year == i) %>%
+#     group_by(month, site) %>%
+#     summarise(meanT = mean(`air temp [K]`))
+#   print(ggplot(yrdata, aes(x = month, y = meanT, color = site)) +
 #           geom_line() +
-#           theme_bw() + 
+#           theme_bw() +
 #           theme(legend.position = c(.1, .8))+
 #           ylab("Mean air temp [K]")+
 #           xlab("Month")+
